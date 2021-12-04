@@ -18,9 +18,20 @@ def signup():
     password1 = request.form.get('password1')
     password2 = request.form.get('password2')
 
+    flag = True
+    if len(email) < 3:
+      flag = False
+      flash('Email minimum have 4 letter', category='error')
+    if len(firstName) < 3:
+      flag = False
+      flash('First name minimum have 4 letter', category='error')
+    if len(password1) < 3:
+      flag = False
+      flash('Password minimum have 4 letter', category='error')
     if password1 != password2:
+      flag = False
       flash('Password is not matching', category='error')
-    else:
+    if flag:
       flash('Account is created!', category='success')
 
   return render_template("sign_up.html")
